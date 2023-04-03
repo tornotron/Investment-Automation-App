@@ -1,7 +1,7 @@
 from alpha_vantage.timeseries import TimeSeries
 import time
 
-ts=TimeSeries(key='12TJNFS3NSMQO9M5')
+# ts=TimeSeries(key)
 symbols = ['AAPL', 'GOOG', 'MSFT', 'AMZN']
 
 for symbol in symbols:
