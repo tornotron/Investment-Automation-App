@@ -1,7 +1,8 @@
 from alpha_vantage.timeseries import TimeSeries
+from dotenv import load_dotenv
 import time
 
-# ts=TimeSeries(key)
+ts=TimeSeries(key='API_KEY')
 symbols = ['AAPL', 'GOOG', 'MSFT', 'AMZN']
 
 for symbol in symbols:
