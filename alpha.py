@@ -10,14 +10,13 @@ API_KEY = os.getenv("API_KEY")
 
 # ts = TimeSeries(key="API_KEY")
 # symbols = ["AAPL", "GOOG", "MSFT", "AMZN"]
-symbols=[]
+symbols = []
 
-with open('nasdaq_tickers.csv','r') as file:
-    reader=csv.reader(file)
+with open("nasdaq_tickers.csv", "r") as file:
+    reader = csv.reader(file)
     for row in reader:
         symbols.append(row[0])
 
-     
 
 for symbol in symbols:
     url = (
