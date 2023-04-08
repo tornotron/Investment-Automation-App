@@ -3,7 +3,7 @@ import sqlite3
 conn = sqlite3.connect('cashflowdata.db')
 cur = conn.cursor()
 cur.execute("""CREATE TABLE cashflow_table(
-                ticker TEXT,
+                tickers TEXT,
                 cashflow REAL
                 )"""
             )

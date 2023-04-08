@@ -1,9 +1,9 @@
 from yahooquery import Ticker
 import csv
-# import sqlite3
+import sqlite3
 
-# conn=sqlite3.connect('cashflowdata.db')
-# cur=conn.cursor()
+conn=sqlite3.connect('cashflowdata.db')
+cur=conn.cursor()
 symbols = []
 
 
@@ -14,22 +14,23 @@ with open("ticker_test.csv", "r") as file:
     next(reader, None)
     for row in reader:
         symbols.append(row[0])
-print(len(symbols))
-tickers=Ticker(symbols)
-print(tickers)
-dataframe=tickers.cash_flow()
-cashflow_values = dataframe['OperatingCashFlow'].values
-print(len(cashflow_values))
-positive_cashflows=[]
-for cashflow_value in cashflow_values:
-    if cashflow_value>0:
-        positive_cashflows.append(cashflow_value)
-print(len(positive_cashflows))
-# counter=0
 
-# for symbol in symbols:
-#     cur.execute("INSERT INTO cashflow_table (ticker,cashflow) VALUES (?,?)",(symbols[counter], positive_cashflows[counter],))
-#     counter+=1
-#     conn.commit()
+cashflow_values=[]
+recent_cashflow=0
 
-# conn.close()
+for symbol in symbols:
+    try:            
+        tickers=Ticker(symbol)     
+        dataframe=tickers.cash_flow(trailing=False)
+        cashflow_values=dataframe['OperatingCashFlow'].values        
+        recent_cashflow=(float(cashflow_values[-1]))
+        print(recent_cashflow)
+        if(recent_cashflow>0):        
+            cur.execute("INSERT INTO cashflow_table (tickers,cashflow) VALUES (?,?)", (symbol,recent_cashflow))
+            conn.commit()
+            continue
+
+        
+    except TypeError:
+        print("data not found")
+conn.close()
