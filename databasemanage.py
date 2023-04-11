@@ -12,6 +12,11 @@ cur.execute("""CREATE TABLE roce_table(
                 roce REAL
                 )"""
             )
+# cur.execute("""CREATE TABLE freecashflow_table(
+#                 tickers TEXT,
+#                 freecashflow REAL
+#                 )"""
+#             )
 
 
 # cur.execute("""DROP TABLE cashflow_table

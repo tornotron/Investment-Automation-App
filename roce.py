@@ -4,7 +4,7 @@ import sqlite3
 conn = sqlite3.connect("cashflowdata.db")
 cur = conn.cursor()
 
-cur.execute("SELECT tickers from cashflow_table")
+cur.execute("SELECT tickers from freecashflow_table")
 db_rows=cur.fetchall()
 
 
@@ -28,7 +28,7 @@ for symbol in symbols:
         recent_values_ebit = float(ebit_values[-1])
         recent_values_totalassets = float(totalassets_values[-1])
         recent_values_currentliabilities = float(currentliabilities_values[-1])
-        # print(symbol,":",recent_values_ebit,recent_values_totalassets,recent_values_currentliabilities," ", counter)
+        
         capitolemployed=recent_values_totalassets-recent_values_currentliabilities
         roce=(recent_values_ebit/capitolemployed)*100
         print(symbol,":",roce,"%")
