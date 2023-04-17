@@ -42,10 +42,10 @@ class InitialFilter(stocks):
                     continue
 
             except TypeError:
-                print("data not found")
+                print("Data not found")
 
             except KeyError:
-                print("data not found")
+                print("Data not found")
         
         
 
@@ -63,7 +63,9 @@ class InitialFilter(stocks):
                     continue
 
             except KeyError:
-                print("data not found")
+                print("Data not found")
+            except TypeError:
+                print("Data not found")    
                 
 
     def roce(self):
@@ -87,7 +89,6 @@ class InitialFilter(stocks):
 
                 capitolemployed = recent_values_totalassets-recent_values_currentliabilities
                 roce = (recent_values_ebit/capitolemployed)*100
-                print(symbol, ":", roce, "%")
                 if (roce > 15):
                     print(roce)
                     # cur.execute(
@@ -97,6 +98,9 @@ class InitialFilter(stocks):
 
             except KeyError:
                 print("data not found")
+
+            except TypeError:
+                print("Data not found")    
 
 
         
@@ -118,12 +122,26 @@ class InitialFilter(stocks):
                         continue
                 except KeyError:
                     print("Data not found")
+
+                except TypeError:
+                    print("Data not found")    
         
         
 
     def pe_ratio(self):
+        for symbol in self.symbols:
+            try:    
+                tickers=Ticker(symbol)
+                share_price=tickers.financial_data[symbol]["currentPrice"]
+                eps=tickers.key_stats[symbol]["trailingEps"]
+                peratio=share_price/eps
+                print(peratio)
+
+            except KeyError:
+                print("Data not found")
+            except TypeError:
+                print("Data not found")    
         
-        pass
 
 
 class ManagementFilter(stocks):
@@ -131,17 +149,107 @@ class ManagementFilter(stocks):
         super().__init__(symbols)
 
     def roce(self):
-        pass            
+        for symbol in self.symbols:
+            try:
+                tickers = Ticker(symbol)
+
+                dataframe_ebit = tickers.income_statement(trailing=False)
+                ebit_values = dataframe_ebit["EBIT"].values
+
+                dataframe_totalassets = tickers.balance_sheet(trailing=False)
+                totalassets_values = dataframe_totalassets["TotalAssets"].values
+
+                dataframe_currentliabilities = tickers.balance_sheet(trailing=False)
+                currentliabilities_values = dataframe_currentliabilities["CurrentLiabilities"].values
+
+                recent_values_ebit = float(ebit_values[-1])
+                recent_values_totalassets = float(totalassets_values[-1])
+                recent_values_currentliabilities = float(currentliabilities_values[-1])
+
+                capitolemployed = recent_values_totalassets-recent_values_currentliabilities
+                roce = (recent_values_ebit/capitolemployed)*100
+                if (roce > 15):
+                    print(roce)
+                    # cur.execute(
+                    #     "INSERT INTO roce_table (tickers,roce) VALUES (?,?)", (symbol, roce))
+                    # conn.commit()
+                    continue
+
+            except KeyError:
+                print("data not found")
+
+            except TypeError:
+                print("Data not found")
+                    
 
     def current_ratio(self):
-        pass
+        for symbol in self.symbols:
+            try:
+                tickers=Ticker(symbol)
+                current_ratio_values=tickers.financial_data[symbol]["currentRatio"]
+                print(current_ratio_values)
+
+            except KeyError:
+                print("Data not found")    
+            except TypeError:
+                print("Data not found")    
 
     def piotrosky_score(self):
-        pass
+        for symbol in self.symbols:            
+            try:
+                tickers=Ticker(symbol)
+                # Profitability F score calculation begin
+
+                roa=tickers.financial_data[symbol]["returnOnAssets"]
+                if(roa>0):
+                    roa_score=1
+                else:
+                    roa_score=0
+                
+
+                o_cashflow=tickers.cash_flow(trailing=False)["OperatingCashFlow"].values[-1]
+                t_assets=tickers.balance_sheet(trailing=False)["TotalAssets"].values[-1]
+                cfo=o_cashflow/t_assets
+                if(cfo>0):
+                    cfo_score=1   
+                else:
+                    cfo_score=0
+                
+
+                a=tickers.balance_sheet(trailing=False)["TotalAssets"].values
+                list_length=len(a)
+                list_sum=sum(a)
+                average_totalassets=list_sum/list_length
+                recent_net_income=tickers.cash_flow(trailing=False)["NetIncome"].values[-1]
+                before_net_income=tickers.cash_flow(trailing=False)["NetIncome"].values[-2]
+                change_in_roa=(recent_net_income/average_totalassets)-(before_net_income/average_totalassets)
+                if(change_in_roa>0):
+                    change_in_roa_score=1
+                else:
+                    change_in_roa_score=0
+                
 
 
-s=InitialFilter(symbols)
+                if(cfo>roa):
+                    accrual_score=1
+                else:
+                    accrual_score=0
+                
+                # Profitability F score calculation end
+                
 
-operating_cf=s.operating_cashflow()
 
-print(operating_cf)
+
+
+            except TypeError:
+                print("Data not found")                         
+            except KeyError:
+                print("Data not found")    
+        
+
+
+initial_obj=InitialFilter(symbols)
+management_obj=ManagementFilter(symbols)
+
+management_obj.piotrosky_score()
+
