@@ -205,6 +205,7 @@ class ManagementFilter(stocks):
                     roa_score=1
                 else:
                     roa_score=0
+                    
                 
 
                 o_cashflow=tickers.cash_flow(trailing=False)["OperatingCashFlow"].values[-1]
@@ -236,6 +237,50 @@ class ManagementFilter(stocks):
                     accrual_score=0
                 
                 # Profitability F score calculation end
+
+
+                #Leverage, Liquidity, and Source of Funds calculation begin
+
+                recent_longTermDebt=tickers.balance_sheet(trailing=False)["LongTermDebt"].values[-1]
+                before_longTermDebt=tickers.balance_sheet(trailing=False)["LongTermDebt"].values[-2]
+                if((recent_longTermDebt/average_totalassets)>(before_longTermDebt-average_totalassets)):
+                    levrage_score=1
+                else:
+                    levrage_score=0
+                
+
+
+                recent_currentAssets=tickers.balance_sheet(trailing=False)["CurrentAssets"].values[-1]
+                before_currentAssets=tickers.balance_sheet(trailing=False)["CurrentAssets"].values[-2]
+                recent_currentLiabities=tickers.balance_sheet(trailing=False)["CurrentLiabilities"].values[-1]
+                before_currentLiabities=tickers.balance_sheet(trailing=False)["CurrentLiabilities"].values[-2]
+                recent_currentratio=recent_currentAssets/recent_currentLiabities
+                before_currentratio=before_currentAssets/before_currentLiabities
+                if(recent_currentratio>before_currentratio):
+                    currentRatio_score=1
+                else:
+                    currentRatio_score=0
+
+
+
+
+
+                recent_commonEquity=tickers.balance_sheet(trailing=False)["CommonStockEquity"].values[-1]        
+                before_commonEquity=tickers.balance_sheet(trailing=False)["CommonStockEquity"].values[-2]
+                if(recent_commonEquity>before_commonEquity):
+                    commonequity_score=1
+                else:
+                    commonequity_score=0
+
+                #Leverage, Liquidity, and Source of Funds calculation end
+
+
+                
+
+                
+                
+
+
                 
 
 
