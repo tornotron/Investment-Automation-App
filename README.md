@@ -12,7 +12,7 @@
   <a href="https://github.com/tornotron">
     <img src="favicon.png" alt="Logo" width="80" height="80">
   </a>
-  <h3 align="center">Echno Attendance</h3>
+  <h3 align="center">Investment Automation App</h3>
   <div align="center">
     Attendance Management App  
     <br />
