@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tornotron">
-    <img src="assets/logo/2.png" alt="Logo" width="80" height="80">
+    <img src="favicon.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Echno Attendance</h3>
   <div align="center">
@@ -56,9 +56,7 @@
 ## About The Project
 
 <div align="center">
-  <img alt="Product Image 1" width="20%" height="20%" src="assets/images/1.png">
-  <img alt="Product Image 1" width="20%" height="20%" src="assets/images/2.png">
-  <img alt="Product Image 1" width="20%" height="20%" src="assets/images/3.png">
+  <img alt="Product Image 1" width="50%" height="50%" src="Investment-Automation-App-Dashboard.png">
  
   <!-- Add vertical space -->
   <br>  
