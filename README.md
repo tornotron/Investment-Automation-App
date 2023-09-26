@@ -56,7 +56,9 @@
 ## About The Project
 
 <div align="center">
-  <img alt="Product Image 1" width="50%" height="50%" src="Investment-Automation-App-Dashboard.png">
+  <img alt="Product Image 1" width="30%" height="30%" src="Investment-Automation-App-Dashboard-1.png">
+  <img alt="Product Image 1" width="30%" height="30%" src="Investment-Automation-App-Dashboard-2.png">
+  <img alt="Product Image 1" width="30%" height="30%" src="Investment-Automation-App-Dashboard-3.png">
  
   <!-- Add vertical space -->
   <br>  
