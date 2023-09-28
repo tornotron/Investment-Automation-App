@@ -88,7 +88,7 @@
 <!-- Using skill-icons -->
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=python,fastapi,sqlite,vscode,neovim,docker,kubernetes,dynamodb,kubernetes" />
+    <img src="https://skillicons.dev/icons?i=python,fastapi,sqlite,vscode,neovim,docker,kubernetes,dynamodb,githubactions" />
   </a>
 </p>
 
