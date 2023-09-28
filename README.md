@@ -67,8 +67,7 @@
 
 </div>
 
-* This is a Flutter application project aimed at managing attendance for various purposes.
-* The app provides features to track attendance records, generate reports, and streamline attendance management processes.
+* This is a Flutter application for automating investment with stock broker APIs.
 * It is designed to be user-friendly and customizable according to specific requirements.
 
 ## Major Features Include:
@@ -89,7 +88,7 @@
 <!-- Using skill-icons -->
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=python,fastapi,sqlite,vscode,neovim" />
+    <img src="https://skillicons.dev/icons?i=python,fastapi,sqlite,vscode,neovim,docker,kubernetes,dynamodb,kubernetes" />
   </a>
 </p>
 
