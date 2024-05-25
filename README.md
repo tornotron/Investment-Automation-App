@@ -130,6 +130,14 @@ uvicorn main:app --reload
 
 <!-- USAGE EXAMPLES -->
 
+3. To setup database for local development run:
+
+```bash
+postgres -U postgres -f sql/table.sql
+```
+
+Note: The directory is not checked into version control, request the developers for getting the file.
+
 ## Usage
 
 - The docker files for production will be made available soon
