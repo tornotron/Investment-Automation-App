@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8000
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=staging
+    restart: always
+    secrets:
+      - secret_key
+    networks:
+      - app-network

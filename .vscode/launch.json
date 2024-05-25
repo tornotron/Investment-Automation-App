@@ -5,12 +5,42 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--reload",
+            ],
+            // "jinja": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: FastAPI Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--reload",
+                "--port",
+                "8000",
+                "--host",
+                "0.0.0.0",
+                "--log-level",
+                "debug"
+            ],
+            // "jinja": true,
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: Current File",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "console": "internalConsole",
-            "justMyCode": true
-        },
+            "justMyCode": true,
+        }
     ]
 }

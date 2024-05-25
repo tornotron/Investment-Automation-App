@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+  web:
+    build:
+      context: .
+    # To run with --reload in development, we override the CMD in Dockerfile with following command
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # Volume mount is used for development and is not required in staging or production
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    # .env is not provided in production and instead ./secrets/ are used
+    env_file: .env
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      SECRET_KEY: ${DB_SECRET_KEY}
+    restart: always

@@ -1,17 +1,18 @@
 # Use the official Python base image
 FROM python:3.9-slim
 
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /code
 
-# Copy the requirements file to the container
-COPY requirements.txt .
-
-# Install the Python dependencies
+# Install dependencies
+COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code to the container
-COPY . .
+COPY . /code/
 
 # Expose the port that the FastAPI application will run on
 EXPOSE 8000

@@ -1,32 +1,37 @@
-version: "3"
+version: "3.9"
 
 services:
-  app:
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      DATABASE_URL_FILE: /run/secrets/database_url
+      SECRECT_KEY_FILE: /run/secrets/secret_key
+    secrets:
+      - database_url
+      - secret_key
+    networks:
+      - app-network
+
+  web:
     build:
       context: .
-      dockerfile: Dockerfile
     ports:
       - 8000:8000
-    environment:
-      - APP_ENV=development
+    depends_on:
+      - db
     restart: always
 
-  staging:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8001:8000
-    environment:
-      - APP_ENV=staging
-    restart: always
+secrets:
+  database_url:
+    file: ./secrets/database_url.txt
+  secret_key:
+    file: ./secrets/secret_key.txt
 
-  production:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8002:8000
-    environment:
-      - APP_ENV=production
-    restart: always
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app-network:
