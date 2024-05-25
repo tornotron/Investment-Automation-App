@@ -53,6 +53,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 <div align="center">
@@ -63,12 +64,12 @@
   <!-- Add vertical space -->
   <br>  
   <br>  
-  <br>  
+  <br>
 
 </div>
 
-* This is a Flutter application for automating investment with stock broker APIs.
-* It is designed to be user-friendly and customizable according to specific requirements.
+- This is a Flutter application for automating investment with stock broker APIs.
+- It is designed to be user-friendly and customizable according to specific requirements.
 
 ## Major Features Include:
 
@@ -82,7 +83,7 @@
 ### Built With
 
 <!-- Using Devicon font -->
-<!-- <img height="50px" width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" /> -->  
+<!-- <img height="50px" width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" /> -->
 <!-- * [![Flutter][Flutter-Icon]][https://flutter.dev] -->
 
 <!-- Using skill-icons -->
@@ -97,8 +98,8 @@
 <!-- Using Shields.io and Simple Icons -->
 <!-- <img src="https://img.shields.io/badge/Flutter-20232A?style=for-the-badge&logo=flutter&logoColor=61DAFB" />   -->
 
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 The App can be deployed with Python production environment.
@@ -107,34 +108,36 @@ The App can be deployed with Python production environment.
 
 This is an example of how to list things you need to use the software and how to install them.
 
-* Setup local dev environment with necessary libraries
-* Setup either `anaconda` or `python virtual env`
+- Setup local dev environment with necessary libraries
+- Setup either `anaconda` or `python virtual env`
 
 ### Installation
 
 1. Install fastapi and uvicorn before running the project
+
 ```bash
   pip install fastapi
   pip install uvicorn
 ```
 
 2. To start the server run the command below , it will run at endpoint http://localhost:8000/
+
 ```bash
 uvicorn main:app --reload
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
-* The docker files for production will be made available soon
+- The docker files for production will be made available soon
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -150,21 +153,81 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the GNU License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Proposed folder structure of the project
 
+```
+investment_automation_app/
+├── app/
+│   ├── api/
+│   │   ├── v1/
+│   │   │   ├── endpoints/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── user.py
+│   │   │   │   ├── portfolio.py
+│   │   │   │   ├── trade.py
+│   │   │   │   └── ...
+│   │   │   ├── __init__.py
+│   │   │   └── dependencies.py
+│   │   ├── __init__.py
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── security.py
+│   │   └── __init__.py
+│   ├── db/
+│   │   ├── base.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py
+│   │   │   ├── portfolio.py
+│   │   │   ├── trade.py
+│   │   │   └── ...
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py
+│   │   │   ├── portfolio.py
+│   │   │   ├── trade.py
+│   │   │   └── ...
+│   │   ├── crud/
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py
+│   │   │   ├── portfolio.py
+│   │   │   ├── trade.py
+│   │   │   └── ...
+│   │   ├── __init__.py
+│   ├── services/
+│   │   ├── data_processing.py
+│   │   ├── trading.py
+│   │   └── ...
+│   ├── main.py
+│   └── __init__.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_user.py
+│   ├── test_portfolio.py
+│   └── ...
+├── scripts/
+│   ├── data_fetch.py
+│   ├── data_analysis.py
+│   └── ...
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
+```
 
 <!-- CONTACT -->
+
 ## Contact
 
-Tornotron - [@tornotron](https://twitter.com/tornotron) - info@tornotron.com 
+Tornotron - [@tornotron](https://twitter.com/tornotron) - info@tornotron.com
 
 Project Link: [https://github.com/tornotron/Investment-Automation-App](https://github.com/tornotron/Investment-Automation-App)
 
@@ -172,16 +235,15 @@ Project Link: [https://github.com/tornotron/Investment-Automation-App](https://g
 
 ## Branch Ownership
 
- | Status | Branch | Owner
- | --- | --- | ---
- |  | `development` | [Abhijith Anandakrishnan](abhijithananthan@gmail.com)
- |  | `stock-branch` | [Hrishikesh Ajith](hrishikeshajith0@gmail.com)
-
+| Status | Branch         | Owner                                                 |
+| ------ | -------------- | ----------------------------------------------------- |
+|        | `development`  | [Abhijith Anandakrishnan](abhijithananthan@gmail.com) |
+|        | `stock-branch` | [Hrishikesh Ajith](hrishikeshajith0@gmail.com)        |
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-* Tornotron E Commerce Private Ltd. - [https://tornotron.com](https://tornotron.com)
+- Tornotron E Commerce Private Ltd. - [https://tornotron.com](https://tornotron.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
