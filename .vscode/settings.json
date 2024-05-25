@@ -12,6 +12,8 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "**/__pycache__": true,
+        // Comment below line to see the __init__.py files
+        "**/_*.py": true,
     },
     "python.defaultInterpreterPath": "/home/sps/ProgramFiles/anaconda/anaconda3/envs/ibkr/bin/python",
     "terminal.integrated.profiles.linux": {
