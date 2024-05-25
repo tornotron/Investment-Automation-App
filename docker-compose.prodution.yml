@@ -1,6 +1,26 @@
 version: "3.9"
 
 services:
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql/table.sql:/docker-entrypoint-initdb.d/table.sql
+    env_file: .env
+    environment:
+      POSTGRES_DB_FILE: /run/secrets/db_name
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      DATABASE_URL_FILE: /run/secrets/database_url
+      SECRET_KEY_FILE: /run/secrets/secret_key
+    secrets:
+      - database_url
+      - secret_key
+      - db_name
+      - db_user
+      - db_password
+    networks:
+      - app-network
   web:
     build:
       context: .
@@ -15,4 +35,16 @@ services:
     secrets:
       - secret_key
     networks:
-      - app-netwroks
+      - app-netwrok
+
+secrets:
+  database_url:
+    file: ./secrets/database_url.txt
+  secret_key:
+    file: ./secrets/secret_key.txt
+  db_name:
+    file: ./secrets/db_name.txt
+  db_user:
+    file: ./secrets/db_user.txt
+  db_password:
+    file: ./secrets/db_password.txt

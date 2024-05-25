@@ -5,9 +5,13 @@ services:
     image: postgres:14
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    env_file: .env
     environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       DATABASE_URL_FILE: /run/secrets/database_url
-      SECRECT_KEY_FILE: /run/secrets/secret_key
+      SECRET_KEY_FILE: /run/secrets/secret_key
     secrets:
       - database_url
       - secret_key
