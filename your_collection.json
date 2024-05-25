@@ -1,0 +1,78 @@
+{
+    "info": {
+        "name": "FastAPI API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "create_user",
+            "request": {
+                "url": "http://localhost:8000/users/",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "read_user",
+            "request": {
+                "url": "http://localhost:8000/users/{user_id}",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "create_portfolio",
+            "request": {
+                "url": "http://localhost:8000/portfolios/",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "read_portfolios",
+            "request": {
+                "url": "http://localhost:8000/portfolios/",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "read_portfolio",
+            "request": {
+                "url": "http://localhost:8000/portfolios/{portfolio_id}",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "create_trade",
+            "request": {
+                "url": "http://localhost:8000/trades/",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "read_trades",
+            "request": {
+                "url": "http://localhost:8000/trades/",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "read_trade",
+            "request": {
+                "url": "http://localhost:8000/trades/{trade_id}",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "root",
+            "request": {
+                "url": "http://localhost:8000/",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "fetch",
+            "request": {
+                "url": "http://localhost:8000/fetch",
+                "method": "GET"
+            }
+        }
+    ]
+}
