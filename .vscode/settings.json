@@ -14,4 +14,24 @@
         "**/__pycache__": true,
     },
     "python.defaultInterpreterPath": "/home/sps/ProgramFiles/anaconda/anaconda3/envs/ibkr/bin/python",
+    "terminal.integrated.profiles.linux": {
+        "CondaEnv": {
+            "path": "zsh",
+            "args": [
+                "-c",
+                "source ~/.zshrc && conda activate ibkr && exec zsh"
+            ],
+            "icon": "terminal-bash"
+        },
+        "PostgreSQL": {
+            "path": "zsh",
+            "args": [
+                "-c",
+                "echo your_sudo_password | sudo -S -i -u postgres zsh -c 'psql' && exec zsh"
+            ],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "CondaEnv",
+    "task.autoDetect": "on"
 }
