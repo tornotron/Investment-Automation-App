@@ -30,6 +30,7 @@ exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongrou
 executing @ file:///home/conda/feedstock_root/build_artifacts/executing_1698579936712/work
 fastapi==0.111.0
 fastapi-cli==0.0.4
+fastapi2postman==0.1.2
 fastjsonschema @ file:///home/conda/feedstock_root/build_artifacts/python-fastjsonschema_1703780968325/work/dist
 fonttools @ file:///home/conda/feedstock_root/build_artifacts/fonttools_1712344590944/work
 fqdn @ file:///home/conda/feedstock_root/build_artifacts/fqdn_1638810296540/work/dist
@@ -103,10 +104,12 @@ ply @ file:///home/conda/feedstock_root/build_artifacts/ply_1712242996588/work
 prometheus_client @ file:///home/conda/feedstock_root/build_artifacts/prometheus_client_1707932675456/work
 prompt-toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1702399386289/work
 psutil @ file:///home/conda/feedstock_root/build_artifacts/psutil_1705722404069/work
+psycopg2==2.9.9
 ptyprocess @ file:///home/conda/feedstock_root/build_artifacts/ptyprocess_1609419310487/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
 pure-eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1642875951954/work
 pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1711811537435/work
 pydantic==2.7.1
+pydantic-settings==2.2.1
 pydantic_core==2.18.2
 Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1714846767233/work
 pynvim==0.4.3
