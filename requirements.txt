@@ -1,3 +1,4 @@
+alembic==1.13.1
 annotated-types==0.7.0
 anyio @ file:///home/conda/feedstock_root/build_artifacts/anyio_1708355285029/work
 argon2-cffi @ file:///home/conda/feedstock_root/build_artifacts/argon2-cffi_1692818318753/work
@@ -24,6 +25,7 @@ debugpy @ file:///home/conda/feedstock_root/build_artifacts/debugpy_170744439392
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
 defusedxml @ file:///home/conda/feedstock_root/build_artifacts/defusedxml_1615232257335/work
 dnspython==2.6.1
+ecdsa==0.19.0
 email_validator==2.1.1
 entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1643888246732/work
 exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1704921103267/work
@@ -74,6 +76,7 @@ jupyterlab_server @ file:///home/conda/feedstock_root/build_artifacts/jupyterlab
 jupyterlab_widgets @ file:///home/conda/feedstock_root/build_artifacts/jupyterlab_widgets_1707421892171/work
 kiwisolver @ file:///home/conda/feedstock_root/build_artifacts/kiwisolver_1695379916629/work
 lxml==5.2.2
+Mako==1.3.5
 markdown-it-py==3.0.0
 MarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1706899945820/work
 matplotlib==3.7.4
@@ -107,6 +110,7 @@ psutil @ file:///home/conda/feedstock_root/build_artifacts/psutil_1705722404069/
 psycopg2==2.9.9
 ptyprocess @ file:///home/conda/feedstock_root/build_artifacts/ptyprocess_1609419310487/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
 pure-eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1642875951954/work
+pyasn1==0.6.0
 pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1711811537435/work
 pydantic==2.7.1
 pydantic-settings==2.2.1
@@ -120,6 +124,7 @@ PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_166160483914
 pyte==0.8.1
 python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
 python-dotenv==1.0.1
+python-jose==3.3.0
 python-json-logger @ file:///home/conda/feedstock_root/build_artifacts/python-json-logger_1677079630776/work
 python-multipart==0.0.9
 pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1706886791323/work
@@ -133,6 +138,7 @@ rfc3339-validator @ file:///home/conda/feedstock_root/build_artifacts/rfc3339-va
 rfc3986-validator @ file:///home/conda/feedstock_root/build_artifacts/rfc3986-validator_1598024191506/work
 rich==13.7.1
 rpds-py @ file:///home/conda/feedstock_root/build_artifacts/rpds-py_1715090005522/work
+rsa==4.9
 Send2Trash @ file:///home/conda/feedstock_root/build_artifacts/send2trash_1712584999685/work
 shellingham==1.5.4
 sip @ file:///home/conda/feedstock_root/build_artifacts/sip_1697300422453/work
