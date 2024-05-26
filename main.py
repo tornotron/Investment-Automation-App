@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.v1.endpoints import user, portfolio, trade, daily_stock_filter
+from app.api.v1.endpoints import auth, user, portfolio, trade, daily_stock_filter
 
 app = FastAPI()
 
@@ -11,6 +11,7 @@ app.include_router(
     prefix="/daily_stock_filters",
     tags=["daily_stock_filters"],
 )
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 
 @app.get("/")
