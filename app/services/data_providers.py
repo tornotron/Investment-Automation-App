@@ -144,3 +144,15 @@ class AngelOneDataProvider(DataProvider):
         response.raise_for_status()
         data = response.json()
         return pd.DataFrame(data)
+
+
+class IEXCloudDataProvider(DataProvider):
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+
+    def fetch_data(self, symbol: str) -> pd.DataFrame:
+        url = f"https://api.anotherexample.com/stocks/{symbol}?apikey={self.api_key}"
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        return pd.DataFrame(data)
