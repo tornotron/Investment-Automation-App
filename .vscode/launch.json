@@ -45,8 +45,10 @@
             "request": "launch",
             "program": "${cwd}/app/cli/admin.py",
             "args": [
-                "upload-tickers",
+                "bulk-upload-tickers",
+                "--provider",
                 "YAHOO",
+                "--file-path",
                 "assets/YahooTickerSymbols-September2017.xlsx"
             ],
             "console": "internalConsole",

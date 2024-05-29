@@ -2,6 +2,8 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db import crud, models, schemas
 from app.api.v1.dependencies import get_db
+from app.services.file_parser import parse_ticker_file
+from typing import List
 
 router = APIRouter()
 
@@ -26,7 +28,7 @@ def upload_tickers(
     crud.delete_tickers_by_provider(db, provider)
 
     # Insert new tickers
-    crud.insert_tickers(db, tickers_df, provider)
+    crud.bulk_insert_tickers(db, tickers_df, provider)
 
     return {"message": "Tickers uploaded successfully"}
 
