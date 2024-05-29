@@ -1,8 +1,8 @@
-"""Added models
+"""Added basic models
 
-Revision ID: 280551584013
+Revision ID: 3cc131d00f29
 Revises: 
-Create Date: 2024-05-26 06:34:55.910436
+Create Date: 2024-05-29 13:22:15.973489
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '280551584013'
+revision: str = '3cc131d00f29'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -29,6 +29,18 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_daily_stock_filter_id'), 'daily_stock_filter', ['id'], unique=False)
     op.create_index(op.f('ix_daily_stock_filter_stock_symbol'), 'daily_stock_filter', ['stock_symbol'], unique=False)
+    op.create_table('ticker',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('ticker', sa.String(), nullable=False),
+    sa.Column('name', sa.String(), nullable=True),
+    sa.Column('exchange', sa.String(), nullable=True),
+    sa.Column('category_name', sa.String(), nullable=True),
+    sa.Column('country', sa.String(), nullable=True),
+    sa.Column('provider', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_ticker_id'), 'ticker', ['id'], unique=False)
+    op.create_index(op.f('ix_ticker_ticker'), 'ticker', ['ticker'], unique=False)
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
@@ -77,6 +89,9 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_user_full_name'), table_name='user')
     op.drop_index(op.f('ix_user_email'), table_name='user')
     op.drop_table('user')
+    op.drop_index(op.f('ix_ticker_ticker'), table_name='ticker')
+    op.drop_index(op.f('ix_ticker_id'), table_name='ticker')
+    op.drop_table('ticker')
     op.drop_index(op.f('ix_daily_stock_filter_stock_symbol'), table_name='daily_stock_filter')
     op.drop_index(op.f('ix_daily_stock_filter_id'), table_name='daily_stock_filter')
     op.drop_table('daily_stock_filter')
