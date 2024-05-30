@@ -5,7 +5,14 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.db.models import daily_stock_filter, portfolio, trade, user, ticker
+from app.db.models import (
+    daily_stock_filter,
+    portfolio,
+    trade,
+    user,
+    ticker,
+    index_listing,
+)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
