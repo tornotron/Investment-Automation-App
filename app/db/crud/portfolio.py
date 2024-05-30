@@ -13,7 +13,7 @@ def get_portfolios(db: Session, skip: int = 0, limit: int = 10):
 
 
 def create_portfolio(db: Session, portfolio: schemas.PortfolioCreate, owner_id: int):
-    db_portfolio = models.Portfolio(**portfolio.dict(), owner_id=owner_id)
+    db_portfolio = models.Portfolio(**portfolio.model_dump(), owner_id=owner_id)
     db.add(db_portfolio)
     db.commit()
     db.refresh(db_portfolio)
