@@ -33,7 +33,7 @@ print("{}".format(tickers))
 driver.quit()
 
 data = {
-    "tickers": tickers,
+    "ticker": tickers,
     "provider": ["Yahoo"] * len(tickers),
     "index": ["^NSEI"] * len(tickers),
 }

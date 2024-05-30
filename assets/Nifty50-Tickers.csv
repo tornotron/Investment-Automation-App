@@ -1,4 +1,4 @@
-tickers,provider,index
+ticker,provider,index
 LT.NS,Yahoo,^NSEI
 HEROMOTOCO.NS,Yahoo,^NSEI
 HINDALCO.NS,Yahoo,^NSEI
