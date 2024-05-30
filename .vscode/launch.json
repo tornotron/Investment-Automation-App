@@ -45,11 +45,9 @@
             "request": "launch",
             "program": "${cwd}/app/cli/admin.py",
             "args": [
-                "bulk-upload-tickers",
-                "--provider",
-                "YAHOO",
+                "upload-index-listings",
                 "--file-path",
-                "assets/YahooTickerSymbols-September2017.xlsx"
+                "assets/Nifty50-Tickers.csv",
             ],
             "console": "internalConsole",
             "justMyCode": true,
