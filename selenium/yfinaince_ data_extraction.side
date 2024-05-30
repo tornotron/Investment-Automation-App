@@ -1,0 +1,64 @@
+{
+  "id": "40709642-5869-4148-90ce-ec84334aeb9a",
+  "version": "2.0",
+  "name": "yfinaince data",
+  "url": "https://sg.finance.yahoo.com/quote/%5ENSEI/",
+  "tests": [{
+    "id": "71d57d15-7df1-4fd6-9874-9cab8dd42943",
+    "name": "NSEI",
+    "commands": [{
+      "id": "0c593e74-f328-419b-96c3-d7c531c63b00",
+      "comment": "",
+      "command": "open",
+      "target": "https://sg.finance.yahoo.com/quote/%5ENSEI/components/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bd151481-9d2d-4e99-94f6-d23b0c3dd0b7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1854x1031",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "521465af-9ded-4229-9164-9898fcb5af58",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//div[@id=\"Main\"]//tr[30]//a",
+      "targets": [],
+      "value": "10000"
+    }, {
+      "id": "3101f51d-65fc-4302-8015-c3a11fcc3087",
+      "comment": "",
+      "command": "storeText",
+      "target": "xpath=//div[@id=\"Main\"]//tr[30]//a",
+      "targets": [
+        ["linkText=ONGC.NS", "linkText"],
+        ["css=.BdT:nth-child(1) .C\\(\\$linkColor\\)", "css:finder"],
+        ["xpath=//a[contains(text(),'ONGC.NS')]", "xpath:link"],
+        ["xpath=//div[@id='Col1-0-Components-Proxy']/section/section/div/table/tbody/tr/td/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/quote/ONGC.NS')]", "xpath:href"],
+        ["xpath=//td/a", "xpath:position"],
+        ["xpath=//a[contains(.,'ONGC.NS')]", "xpath:innerText"]
+      ],
+      "value": "T1"
+    }, {
+      "id": "b17095f1-b314-420d-b91c-7d1a00cf2c37",
+      "comment": "",
+      "command": "echo",
+      "target": "${T1}",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "8758e45c-4c36-43ab-a8ab-44f335102b78",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://sg.finance.yahoo.com/", "https://sg.finance.yahoo.com/quote/%5ENSEI/"],
+  "plugins": []
+}
