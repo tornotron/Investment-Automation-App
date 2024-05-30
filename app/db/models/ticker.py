@@ -15,3 +15,6 @@ class Ticker(Base):
     country = Column(String, nullable=True)
     provider = Column(String, nullable=False)
     index_listings = Column(JSON, nullable=True)
+    index_listings = relationship(
+        "IndexListing", back_populates="ticker", cascade="all, delete-orphan"
+    )

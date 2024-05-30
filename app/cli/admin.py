@@ -1,6 +1,8 @@
 import sys
 import os
 
+import pandas as pd
+
 
 # Ensure the app module is in the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -119,6 +121,39 @@ def bulk_update_tickers(file_path: str):
         tickers_df = parse_ticker_file(file_path, file_type)
         crud.bulk_update_tickers(db, tickers_df)
         click.echo("Tickers updated successfully")
+    except Exception as e:
+        click.echo(f"Error: {str(e)}")
+    finally:
+        db.close()
+
+
+@cli.command()
+@click.option(
+    "--file-path",
+    type=click.Path(exists=True),
+    required=True,
+    help="Path to the CSV or Excel file containing index listings.",
+)
+def upload_index_listings(file_path: str):
+    """Upload index listings from a file and insert them into the database."""
+    db: Session = SessionLocal()
+    try:
+        file_type = file_path.split(".")[-1]
+        if file_type not in ["csv", "xlsx"]:
+            raise Exception("Unsupported file type")
+        listings_df = (
+            pd.read_csv(file_path) if file_type == "csv" else pd.read_excel(file_path)
+        )
+
+        # Check if required columns are present
+        required_columns = {"ticker", "index", "provider"}
+        if not required_columns.issubset(set(listings_df.columns)):
+            raise Exception(
+                f"File must contain the following columns: {required_columns}"
+            )
+
+        crud.insert_index_listings(db, listings_df)
+        click.echo("Index listings uploaded successfully")
     except Exception as e:
         click.echo(f"Error: {str(e)}")
     finally:
