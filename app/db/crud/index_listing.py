@@ -12,6 +12,17 @@ def insert_index_listings(db: Session, listings_df: pd.DataFrame):
             .filter(Ticker.ticker == row["ticker"], Ticker.provider == row["provider"])
             .first()
         )
+        il = (
+            db.query(IndexListing)
+            .filter(
+                IndexListing.ticker == row["ticker"],
+                IndexListing.index == row["index"],
+                IndexListing.provider == row["provider"],
+            )
+            .first()
+        )
+        if il:
+            continue
         if ticker:
             index_listing = IndexListing(
                 index=row["index"],
@@ -20,4 +31,9 @@ def insert_index_listings(db: Session, listings_df: pd.DataFrame):
                 ticker_id=ticker.id,
             )
             db.add(index_listing)
+        else:
+            error_msg = (
+                f"The ticker: {row['ticker']} were not found in the ticker table"
+            )
+            raise ValueError(error_msg)
     db.commit()

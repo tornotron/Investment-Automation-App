@@ -34,7 +34,7 @@ driver.quit()
 
 data = {
     "ticker": tickers,
-    "provider": ["Yahoo"] * len(tickers),
+    "provider": ["YAHOO"] * len(tickers),
     "index": ["^NSEI"] * len(tickers),
 }
 df = pd.DataFrame(data)

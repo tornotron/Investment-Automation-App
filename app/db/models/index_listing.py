@@ -12,4 +12,4 @@ class IndexListing(Base):
     provider = Column(String, nullable=False)
     ticker_id = Column(Integer, ForeignKey("ticker.id"), nullable=False)
 
-    ticker = relationship("Ticker", back_populates="index_listings")
+    ticker_model = relationship("Ticker", back_populates="index_listings")
