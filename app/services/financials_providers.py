@@ -21,6 +21,11 @@ class FinancialsProvider(ABC):
     def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
         pass
 
+    def unsupported_method(self, method_name: str):
+        raise NotImplementedError(
+            f"This method is not yet supported by the {self.__class__.__name__} provider"
+        )
+
 
 class YahooFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str, extraction_lib: YahooFinancialsExtractionLib):
@@ -65,37 +70,85 @@ class AlphaVantageFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
 
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
+
 
 class FinaincialModelingGrepFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
+
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
 
 
 class StockRowFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
 
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
+
 
 class IBKRFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
+
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
 
 
 class AlpacaFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
 
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
+
 
 class ZerodhaFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
+
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
 
 
 class AngelOneFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
 
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
+
 
 class IEXCloudFinancialsProvider(FinancialsProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
+
+    def get_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_tickers_from_index")
+
+    def get_psu_tickers_from_index(self, db: Session, index: str) -> List[str]:
+        return self.unsupported_method("get_psu_tickers_from_index")
