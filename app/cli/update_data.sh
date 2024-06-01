@@ -7,3 +7,5 @@ export PYTHONPATH=$(pwd)
 # python app/cli/admin.py upload-single-ticker --provider YAHOO --ticker LTIM.NS --name "LTIMindtree Limited" --category-name "Information Technology" --country "India" --exchange "NSE"
 # python app/cli/admin.py upload-single-ticker --provider YAHOO --ticker SHRIRAMFIN.NS --name "Shriram Finance Limited" --category-name "Financial Services" --country "India" --exchange "NSE"
 # python app/cli/admin.py upload-single-ticker --provider YAHOO --ticker M\&M.NS --name "Mahindra & Mahindra Limited" --category-name "Consumer Cyclical" --country "India" --exchange "NSE"
+# python app/cli/admin.py upload-single-ticker --provider YAHOO --ticker SBILIFE.NS --name "SBI Life Insurance Company Limited" --category-name "Financial Services" --country "India" --exchange "NSE"
+# python app/cli/admin.py upload-psu-listings --file-path assets/YahooPSUTickerSymbols.xlsx

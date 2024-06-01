@@ -45,9 +45,9 @@
             "request": "launch",
             "program": "${cwd}/app/cli/admin.py",
             "args": [
-                "upload-index-listings",
+                "upload-psu-listings",
                 "--file-path",
-                "assets/Nifty50-Tickers.csv",
+                "assets/YahooPSUTickerSymbols.xlsx",
             ],
             "console": "internalConsole",
             "justMyCode": true,

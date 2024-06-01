@@ -4,3 +4,4 @@ from .trade import Trade
 from .daily_stock_filter import DailyStockFilter
 from .ticker import Ticker
 from .index_listing import IndexListing
+from .psu_listing import PSUListing

@@ -12,6 +12,7 @@ from app.db.models import (
     user,
     ticker,
     index_listing,
+    psu_listing,
 )
 
 # this is the Alembic Config object, which provides

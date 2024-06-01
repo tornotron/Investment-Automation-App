@@ -42,15 +42,15 @@ CriteriaWeightage = {
 }
 
 TickerBuckets = {
-    SelectionCriteria.NIFTY50_LOW_BY10TO15_FROM_52WH: {},
-    SelectionCriteria.NIFTY50_PSUS: {},
-    SelectionCriteria.NIFTY50_TOP5_BY_MC: {},
-    SelectionCriteria.STREAK_RECOMMENDED: {},
-    SelectionCriteria.NEWS_RECOMMENDED: {},
-    SelectionCriteria.HIGH_VOL: {},
-    SelectionCriteria.HIGH_MOVEMENT: {},
-    SelectionCriteria.VOL_SHOCKERS: {},
-    FilteredLists.FINAL_LIST: {},
+    SelectionCriteria.NIFTY50_LOW_BY10TO15_FROM_52WH: [],
+    SelectionCriteria.NIFTY50_PSUS: [],
+    SelectionCriteria.NIFTY50_TOP5_BY_MC: [],
+    SelectionCriteria.STREAK_RECOMMENDED: [],
+    SelectionCriteria.NEWS_RECOMMENDED: [],
+    SelectionCriteria.HIGH_VOL: [],
+    SelectionCriteria.HIGH_MOVEMENT: [],
+    SelectionCriteria.VOL_SHOCKERS: [],
+    FilteredLists.FINAL_LIST: [],
 }
 
 
@@ -59,7 +59,12 @@ class StockSelectionService:
         self.date = date
 
     def update_nifty_50_low_by10to15_from_52wh(fp: FinancialsProvider):
-        nifty50_tickers = fp.get_tickers("NIFTY50")
+        SelectionCriteria.NIFTY50_LOW_BY10TO15_FROM_52WH = fp.get_tickers_from_index(
+            "NIFTY50"
+        )
+
+    def update_nifty_50_psus(fp: FinancialsProvider):
+        SelectionCriteria.NIFTY50_PSUS = fp.get_psu_tickers_from_index("NIFTY50")
 
 
 class StockFilteringService:

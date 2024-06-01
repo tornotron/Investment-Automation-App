@@ -160,5 +160,38 @@ def upload_index_listings(file_path: str):
         db.close()
 
 
+@cli.command()
+@click.option(
+    "--file-path",
+    type=click.Path(exists=True),
+    required=True,
+    help="Path to the CSV or Excel file containing PSU listings.",
+)
+def upload_psu_listings(file_path: str):
+    """Upload PSU listings from a file and insert them into the database."""
+    db: Session = SessionLocal()
+    try:
+        file_type = file_path.split(".")[-1]
+        if file_type not in ["csv", "xlsx"]:
+            raise Exception("Unsupported file type")
+        listings_df = (
+            pd.read_csv(file_path) if file_type == "csv" else pd.read_excel(file_path)
+        )
+
+        # Check if required columns are present
+        required_columns = {"ticker", "index", "provider"}
+        if not required_columns.issubset(set(listings_df.columns)):
+            raise Exception(
+                f"File must contain the following columns: {required_columns}"
+            )
+
+        crud.insert_psu_listings(db, listings_df)
+        click.echo("PSU listings uploaded successfully")
+    except Exception as e:
+        click.echo(f"Error: {str(e)}")
+    finally:
+        db.close()
+
+
 if __name__ == "__main__":
     cli()

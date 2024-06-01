@@ -18,3 +18,6 @@ class Ticker(Base):
     index_listings = relationship(
         "IndexListing", back_populates="ticker_model", cascade="all, delete-orphan"
     )
+    psu_listings = relationship(
+        "PSUListing", back_populates="ticker_model", cascade="all, delete-orphan"
+    )
