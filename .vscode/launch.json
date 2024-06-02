@@ -45,9 +45,9 @@
             "request": "launch",
             "program": "${cwd}/app/cli/admin.py",
             "args": [
-                "upload-psu-listings",
-                "--file-path",
-                "assets/YahooPSUTickerSymbols.xlsx",
+                "fetch-and-update-missing-ticker-info",
+                "--provider",
+                "YAHOO"
             ],
             "console": "internalConsole",
             "justMyCode": true,

@@ -5,6 +5,9 @@ from app.db.models.index_listing import IndexListing
 from sqlalchemy.orm import Session
 
 from app.db.models.psu_listing import PSUListing
+from app.db.models.ticker import Ticker
+from app.db.crud.ticker import update_single_ticker
+import yfinance as yf
 
 
 class YahooFinancialsExtractionLib(Enum):

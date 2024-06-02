@@ -11,7 +11,11 @@ import click
 from sqlalchemy.orm import Session
 from app.db.session import SessionLocal
 from app.services.file_parser import parse_ticker_file
-from app.db.crud.ticker import insert_single_ticker, ticker_exists, update_ticker
+from app.db.crud.ticker import insert_single_ticker, ticker_exists, update_single_ticker
+from app.services.financials_providers import (
+    FinancialsProvider,
+    YahooFinancialsProvider,
+)
 from app.db import crud
 
 
@@ -93,7 +97,7 @@ def update_single_ticker(ticker: str, provider: str, field: str, value: str):
     db: Session = SessionLocal()
     try:
         updates = {field: value, "ticker": ticker, "provider": provider}
-        ticker = update_ticker(db, updates)
+        ticker = update_single_ticker(db, updates)
         if ticker:
             click.echo(f"Ticker {ticker.ticker} updated successfully")
         else:
@@ -187,6 +191,26 @@ def upload_psu_listings(file_path: str):
 
         crud.insert_psu_listings(db, listings_df)
         click.echo("PSU listings uploaded successfully")
+    except Exception as e:
+        click.echo(f"Error: {str(e)}")
+    finally:
+        db.close()
+
+
+@cli.command()
+@click.option(
+    "--provider",
+    required=True,
+    help="The name of the provider to fetch missing ticker information.",
+)
+def fetch_and_update_missing_ticker_info(provider: str):
+    """Fetch and update missing ticker information from the provider."""
+    db: Session = SessionLocal()
+    try:
+        tickers = crud.get_tickers_with_null_vlaues(db)
+        for ticker in tickers:
+            crud.get_missing_ticker_data(db, ticker, provider)
+        click.echo("Missing ticker information updated successfully")
     except Exception as e:
         click.echo(f"Error: {str(e)}")
     finally:
