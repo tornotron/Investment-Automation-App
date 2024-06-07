@@ -8,6 +8,7 @@ from app.db.models.psu_listing import PSUListing
 from app.db.models.ticker import Ticker
 from app.db.crud.ticker import update_single_ticker
 import yfinance as yf
+import pandas as pd
 
 
 class YahooFinancialsExtractionLib(Enum):
@@ -64,6 +65,37 @@ class YahooFinancialsProvider(FinancialsProvider):
                 .all()
             )
             return [ticker.ticker for ticker in tickers]
+
+        else:
+            raise ValueError(f"Index {index} not supported")
+
+    def get_top_5_by_market_cap(
+        self, db: Session, index: str, exchange: str
+    ) -> List[str]:
+        if index == "NIFTY50":
+            index = "^NSEI"
+        if exchange == "NSE":
+            exchange = "NSI"
+            tickers = (
+                db.query(IndexListing)
+                .filter(
+                    Ticker.index == index,
+                    Ticker.exchange == exchange,
+                    Ticker.provider == "YAHOO",
+                )
+                .all()
+            )
+
+            companies_list = [yf.Ticker(ticker.ticker) for ticker in tickers]
+            comapnies_df = pd.DataFrame(companies_list, columns=["ticker"])
+            comapnies_df["market_cap"] = comapnies_df["ticker"].apply(
+                lambda ticker: yf.Ticker(ticker).info.get("marketCap")
+            )
+            top_5_by_mc = comapnies_df.sort_values(
+                by="market_cap", ascending=False
+            ).head(5)
+
+            return top_5_by_mc["ticker"].tolist()
 
         else:
             raise ValueError(f"Index {index} not supported")
