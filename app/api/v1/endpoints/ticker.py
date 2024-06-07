@@ -2,10 +2,11 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db import crud, models, schemas
 from app.api.v1.dependencies import get_db
-from app.services.file_parser import parse_ticker_file
+from app.services import AssetsManager
 from typing import List
 
 router = APIRouter()
+asset_manager = AssetsManager()
 
 
 @router.post("/upload_tickers/{provider}", response_model=schemas.Message)
@@ -22,7 +23,7 @@ def upload_tickers(
         buffer.write(file.file.read())
 
     # Parse the file
-    tickers_df = parse_ticker_file(file_path, file_type)
+    tickers_df = asset_manager.parse_ticker_file(file_path, file_type)
 
     # Clear existing tickers for the provider
     crud.delete_tickers_by_provider(db, provider)
