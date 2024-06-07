@@ -10,28 +10,11 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from app.db.base import Base
+from sqlalchemy.ext.declarative import declared_attr
 
 
-class Yahoo_30min60day(Base):
-    table_name = "yahoo_30min60day"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    ticker = Column(String(10), nullable=False)
-    date = Column(DateTime(timezone=True), nullable=False)
-    open = Column(Numeric(10, 2))
-    high = Column(Numeric(10, 2))
-    low = Column(Numeric(10, 2))
-    close = Column(Numeric(10, 2))
-    volume = Column(BigInteger)
-    adjusted_close = Column(Numeric(10, 2))
-    dividends = Column(Numeric(10, 2))
-    stock_splits = Column(Numeric(10, 2))
-    repaired = Column(Boolean)
-    __table_args__ = (UniqueConstraint("ticker", "date", name="_ticker_date_uc"),)
-
-
-class Yahoo_60min730day(Base):
-    table_name = "yahoo_60min730day"
+class Yahoo_OHLC_Base(Base):
+    __abstract__ = True
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     ticker = Column(String(10), nullable=False)
@@ -45,22 +28,23 @@ class Yahoo_60min730day(Base):
     dividends = Column(Numeric(10, 2))
     stock_splits = Column(Numeric(10, 2))
     repaired = Column(Boolean)
-    __table_args__ = (UniqueConstraint("ticker", "date", name="_ticker_date_uc"),)
+
+    @declared_attr
+    def __table_args__(cls):
+        return (
+            UniqueConstraint(
+                "ticker", "date", name=f"_{cls.__tablename__}_ticker_date_uc"
+            ),
+        )
 
 
-class Yahoo_1dmaxdays(Base):
-    table_name = "yahoo_1dmaxdays"
+class Yahoo_30min60day(Yahoo_OHLC_Base):
+    __tablename__ = "yahoo_30min60day"
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    ticker = Column(String(10), nullable=False)
-    date = Column(DateTime(timezone=True), nullable=False)
-    open = Column(Numeric(10, 2))
-    high = Column(Numeric(10, 2))
-    low = Column(Numeric(10, 2))
-    close = Column(Numeric(10, 2))
-    volume = Column(BigInteger)
-    adjusted_close = Column(Numeric(10, 2))
-    dividends = Column(Numeric(10, 2))
-    stock_splits = Column(Numeric(10, 2))
-    repaired = Column(Boolean)
-    __table_args__ = (UniqueConstraint("ticker", "date", name="_ticker_date_uc"),)
+
+class Yahoo_1d730day(Yahoo_OHLC_Base):
+    __tablename__ = "yahoo_1d730day"
+
+
+class Yahoo_1wk_maxdays(Yahoo_OHLC_Base):
+    __tablename__ = "yahoo_1wk_maxdays"
