@@ -12,24 +12,27 @@ logger = logging.getLogger(__name__)
 
 class AssetsManager:
 
+    def __init__(self):
+        self.db: Session = SessionLocal()
+
+    def close(self):
+        self.db.close()
+
     def bulk_upload_tickers(
         self,
         provider: str,
         file_path: str,
     ):
-        db: Session = SessionLocal()
         try:
             file_type = file_path.split(".")[-1]
             if file_type not in ["csv", "xlsx"]:
                 raise Exception("Unsupported file type")
             tickers_df = self.parse_ticker_file(file_path, file_type)
-            crud.delete_tickers_by_provider(db, provider)
-            crud.bulk_insert_tickers(db, tickers_df, provider)
+            crud.delete_tickers_by_provider(self.db, provider)
+            crud.bulk_insert_tickers(self.db, tickers_df, provider)
             logger.info("Tickers uploaded successfully")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
     def upload_single_ticker(
         self,
@@ -40,7 +43,6 @@ class AssetsManager:
         category_name: str,
         country: str,
     ):
-        db: Session = SessionLocal()
         try:
             ticker_row = {
                 "ticker": ticker,
@@ -51,18 +53,16 @@ class AssetsManager:
                 "provider": provider,
             }
 
-            if crud.ticker_exists(db, ticker, provider):
+            if crud.ticker_exists(self.db, ticker, provider):
                 logger.warning(
                     f"Ticker {ticker} already exists for provider {provider}"
                 )
                 return
             else:
-                new_ticker = crud.insert_single_ticker(db, ticker_row)
+                new_ticker = crud.insert_single_ticker(self.db, ticker_row)
                 logger.info(f"Ticker {new_ticker.ticker} uploaded successfully")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
     def update_single_ticker(
         self,
@@ -71,40 +71,36 @@ class AssetsManager:
         field: str,
         value: str,
     ):
-        db: Session = SessionLocal()
         try:
             updates = {field: value, "ticker": ticker, "provider": provider}
-            ticker = crud.update_single_ticker(db, updates)
+            ticker = crud.update_single_ticker(self.db, updates)
             if ticker:
                 logger.info(f"Ticker {ticker.ticker} updated successfully")
             else:
                 logger.warn("Ticker not found")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
     def bulk_update_tickers(
         self,
         file_path: str,
     ):
         """Bulk update tickers in the database based on a given field."""
-        db: Session = SessionLocal()
         try:
             file_type = file_path.split(".")[-1]
             if file_type not in ["csv", "xlsx"]:
                 raise Exception("Unsupported file type")
             tickers_df = self.parse_ticker_file(file_path, file_type)
-            crud.bulk_update_tickers(db, tickers_df)
+            crud.bulk_update_tickers(self.db, tickers_df)
             logger.info("Tickers updated successfully")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
-    def upload_index_listings(file_path: str):
+    def upload_index_listings(
+        self,
+        file_path: str,
+    ):
         """Upload index listings from a file and insert them into the database."""
-        db: Session = SessionLocal()
         try:
             file_type = file_path.split(".")[-1]
             if file_type not in ["csv", "xlsx"]:
@@ -122,16 +118,16 @@ class AssetsManager:
                     f"File must contain the following columns: {required_columns}"
                 )
 
-            crud.insert_index_listings(db, listings_df)
+            crud.insert_index_listings(self.db, listings_df)
             logger.info("Index listings uploaded successfully")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
-    def upload_psu_listings(file_path: str):
+    def upload_psu_listings(
+        self,
+        file_path: str,
+    ):
         """Upload PSU listings from a file and insert them into the database."""
-        db: Session = SessionLocal()
         try:
             file_type = file_path.split(".")[-1]
             if file_type not in ["csv", "xlsx"]:
@@ -149,25 +145,23 @@ class AssetsManager:
                     f"File must contain the following columns: {required_columns}"
                 )
 
-            crud.insert_psu_listings(db, listings_df)
+            crud.insert_psu_listings(self.db, listings_df)
             logger.info("PSU listings uploaded successfully")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
-    def fetch_and_update_missing_ticker_info(provider: str):
+    def fetch_and_update_missing_ticker_info(
+        self,
+        provider: str,
+    ):
         """Fetch and update missing ticker information from the provider."""
-        db: Session = SessionLocal()
         try:
-            tickers = crud.get_tickers_with_null_vlaues(db)
+            tickers = crud.get_tickers_with_null_vlaues(self.db)
             for ticker in tickers:
-                crud.get_missing_ticker_data(db, ticker, provider)
+                crud.get_missing_ticker_data(self.db, ticker, provider)
             logger.info("Missing ticker information updated successfully")
         except Exception as e:
             logger.error(f"Error: {str(e)}")
-        finally:
-            db.close()
 
     def parse_ticker_file(self, file_path: str, file_type: str) -> pd.DataFrame:
         if file_type == "csv":
