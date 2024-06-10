@@ -89,7 +89,6 @@ def generate_daily_stock_filters(
     else:
         logger.info("Stocks found for today, using the same list")
         select_stock_list = [stock.stock_symbol for stock in stock_models]
-        select_stock_list = ["POWERGRID.NS", "M&M.NS", "LT.NS"]
     sf = StockFilteringService(dp=dp)
     if select_stock_list:
         final_list = sf.compute_ranked_stocks(
