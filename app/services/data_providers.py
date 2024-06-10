@@ -384,7 +384,8 @@ class YahooDataProvider(DataProvider):
             fetch_condition = True
             # If the updated start date is last week and the time is after trading hours and if the request is made before 9:15 AM then no need to fetch data
             if (
-                (
+                (start_datetime_updated)
+                and (
                     start_datetime_updated.date()
                     == (end_datetime.date() - timedelta(days=7))
                 )
@@ -392,7 +393,7 @@ class YahooDataProvider(DataProvider):
                 and (start_datetime_updated.time() >= time(15, 30))
             ):
                 fetch_condition = False
-            if start_datetime_updated > end_datetime:
+            if start_datetime_updated and start_datetime_updated > end_datetime:
                 fetch_condition = False
             if start_datetime_updated == None:
                 logger.info(f"No data found for {symbol} in {ytable.__tablename__}")

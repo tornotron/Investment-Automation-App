@@ -356,5 +356,4 @@ class StockFilteringService:
 
         points_table_df = pd.DataFrame(points_table)
         points_table_df.sort_values(by="Points", ascending=False, inplace=True)
-        final_list = points_table_df["Ticker"].tolist()
-        return final_list
+        return points_table_df

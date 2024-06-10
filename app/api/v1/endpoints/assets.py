@@ -91,15 +91,13 @@ def generate_daily_stock_filters(
         select_stock_list = [stock.stock_symbol for stock in stock_models]
     sf = StockFilteringService(dp=dp)
     if select_stock_list:
-        final_list = sf.compute_ranked_stocks(
+        points_df = sf.compute_ranked_stocks(
             db,
             validation_criterias,
             select_stock_list,
         )
 
     # Convert the result to the response format
-    # response_data = {
-    #     symbol: df.to_dict(orient="records") for symbol, df in filtered_stocks.items()
-    # }
+    response_data = points_df.to_dict(orient="records")
 
-    # return {"filtered_stocks": list(filtered_stocks.keys()), "details": response_data}
+    return response_data
