@@ -17,14 +17,13 @@ class Yahoo_OHLC_Base(Base):
     __abstract__ = True
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    ticker = Column(String(10), nullable=False)
-    date = Column(DateTime(timezone=True), nullable=False)
+    ticker = Column(String(20), nullable=False)
+    ohlcvdatetime = Column(DateTime(timezone=True), nullable=False)
     open = Column(Numeric(10, 2))
     high = Column(Numeric(10, 2))
     low = Column(Numeric(10, 2))
     close = Column(Numeric(10, 2))
     volume = Column(BigInteger)
-    adjusted_close = Column(Numeric(10, 2))
     dividends = Column(Numeric(10, 2))
     stock_splits = Column(Numeric(10, 2))
     repaired = Column(Boolean)
@@ -33,7 +32,7 @@ class Yahoo_OHLC_Base(Base):
     def __table_args__(cls):
         return (
             UniqueConstraint(
-                "ticker", "date", name=f"_{cls.__tablename__}_ticker_date_uc"
+                "ticker", "ohlcvdatetime", name=f"_{cls.__tablename__}_ticker_date_uc"
             ),
         )
 

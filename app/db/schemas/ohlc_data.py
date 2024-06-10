@@ -4,14 +4,13 @@ from typing import Optional
 
 
 class Yahoo_OHLC_Base(BaseModel):
-    ticker: str = Field(..., max_length=10)
-    date: datetime
+    ticker: str = Field(..., max_length=20)
+    ohlcvdatetime: datetime
     open: Optional[float]
     high: Optional[float]
     low: Optional[float]
     close: Optional[float]
     volume: Optional[int]
-    adjusted_close: Optional[float]
-    dividends: Optional[int]
-    stock_splits: Optional[int]
+    dividends: Optional[float]
+    stock_splits: Optional[float]
     repaired: Optional[bool]

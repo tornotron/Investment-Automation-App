@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class YahooDataExtractionLib(Enum):
+class YahooExtractionLib(Enum):
     YFINANCE = "yfinance"
     YAHOO_FINANCIALS = "yahoofinancials"
 
@@ -64,6 +64,31 @@ class UserAgent(Enum):
     INTRADAY = "Tornotron-Trading-Client-Intraday/1.0"
     SWING = "Tornotron-Trading-Client-Swing/1.0"
     POSITIONAL = "Tornotron-Trading-Client-Positional/1.0"
+
+
+class SelectionCriteriaKeys(Enum):
+    K1 = "NIFTY50_LOW_BY10TO15_FROM_52WH"
+    K2 = "NIFTY50_PSUS"
+    K3 = "NIFTY50_TOP5_BY_MC"
+    K4 = "STREAK_RECOMMENDED"
+    K5 = "NEWS_RECOMMENDED"
+    K6 = "HIGH_VOL"
+    K7 = "HIGH_MOVEMENT"
+    K8 = "VOL_SHOCKERS"
+
+
+class ValidationCriteriaKeys(Enum):
+    K1 = "TREND_INTRADAY"
+    K2 = "TREND_SWING"
+    K3 = "TREND_POSITIONAL"
+    K4 = "TREND_INTR_MATCH_SWING"
+    K5 = "TREND_INTR_MATCH_POS"
+    K6 = "TREND_SWING_MATCH_POS"
+    K7 = "INDEX_TREND"
+    K8 = "GLOBAL_INDEX_TREND"
+    K9 = "MARKET_TREND_NEWS"
+    K10 = "MOMENTUM"
+    K11 = "OPTIONS_INTEREST"
 
 
 class SelectionCriteria(Enum):

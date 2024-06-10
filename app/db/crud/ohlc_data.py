@@ -6,7 +6,7 @@ from datetime import datetime
 def create_ohlc_data(
     db: Session, ohlc_data: schemas.Yahoo_OHLC_Base, table: models.Yahoo_OHLC_Base
 ):
-    db_ohlc = table(**ohlc_data.to_dict())
+    db_ohlc = table(**ohlc_data.model_dump())
     db.add(db_ohlc)
     db.commit()
     db.refresh(db_ohlc)
@@ -19,7 +19,11 @@ def get_ohlc_data(
     date: datetime,
     table: models.Yahoo_OHLC_Base,
 ):
-    return db.query(table).filter(table.ticker == ticker, table.date == date).first()
+    return (
+        db.query(table)
+        .filter(table.ticker == ticker, table.ohlcvdatetime == date)
+        .first()
+    )
 
 
 def update_ohlc_data(
@@ -31,7 +35,9 @@ def update_ohlc_data(
 ):
 
     ohlc_data = (
-        db.query(table).filter(table.ticker == ticker, table.date == date).first()
+        db.query(table)
+        .filter(table.ticker == ticker, table.ohlcvdatetime == date)
+        .first()
     )
     if ohlc_data:
         for key, value in updates.items():
@@ -48,7 +54,9 @@ def delete_ohlc_data(
     table: models.Yahoo_OHLC_Base,
 ):
     ohlc_data = (
-        db.query(table).filter(table.ticker == ticker, table.date == date).first()
+        db.query(table)
+        .filter(table.ticker == ticker, table.ohlcvdatetime == date)
+        .first()
     )
     if ohlc_data:
         db.delete(ohlc_data)
